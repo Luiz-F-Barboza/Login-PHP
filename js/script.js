@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const formCadastro = document.querySelector("#form-cadastro");
     if(formCadastro){
         formCadastro.addEventListener("submit", (e) => {
+            
             let nome = formCadastro.nome.value.trim();
             let email = formCadastro.email.value.trim();
             let senha = formCadastro.senha.value;
@@ -11,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 e.preventDefault();
                 return;
             }
-            // Validação simples de email
             if(!email.includes("@") || !email.includes(".")){
                 alert("Digite um email válido.");
                 e.preventDefault();

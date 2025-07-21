@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST['senha'];
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
-    // Verifica se email já existe
     $sql = $conn->prepare("SELECT id FROM usuarios WHERE email = ?");
     $sql->bind_param("s", $email);
     $sql->execute();
