@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Meu Sistema</h1>
+        <h1>NardoDev - LoginSystem</h1>
         <nav>
             <a href="cadastro.php">Cadastro</a> | 
             <a href="login.php">Login</a> | 

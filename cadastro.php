@@ -82,6 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit">Cadastrar</button>
 </form>
 
-<p>Já tem conta? <a href="login.php">Login</a></p>
+<p class="classDoPdeJaTemConta">Já tem conta? <a href="login.php">Login</a></p>
 
 <?php include('templates/footer.php'); ?>

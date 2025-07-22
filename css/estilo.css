@@ -152,3 +152,78 @@ p.msg-sucesso {
     border: 1px solid var(--color-success-border);
     color: var(--color-success-text);
 }
+
+
+.classDoPdeJaTemConta,
+.classDoNaoTemConta {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #495057;
+    margin-top: 1rem;
+}
+
+.classDoPdeJaTemConta a,
+.classDoNaoTemConta a {
+    color: var(--color-primary); /* usa a variável do tema, se estiver usando */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.classDoPdeJaTemConta a:hover,
+.classDoPdeJaTemConta a:focus,
+.classDoNaoTemConta a:hover,
+.classDoNaoTemConta a:focus {
+    color: var(--color-primary-dark); /* azul mais escuro ao passar o mouse */
+    text-decoration: underline;
+    outline: none;
+}
+
+.painel-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f1f3f5;
+}
+
+.painel-bemvindo {
+    background-color: #ffffff;
+    padding: 2rem 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.painel-bemvindo h2 {
+    font-size: 1.75rem;
+    color: #212529;
+    margin-bottom: 1rem;
+}
+
+.painel-bemvindo p {
+    font-size: 1rem;
+    color: #495057;
+    margin-bottom: 1.5rem;
+}
+
+.btn-sair {
+    display: inline-block;
+    padding: 0.6rem 1.25rem;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-sair:hover,
+.btn-sair:focus {
+    background-color: #c82333;
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.4);
+    outline: none;
+}

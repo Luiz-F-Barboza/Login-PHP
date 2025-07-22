@@ -40,6 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit">Entrar</button>
 </form>
 
-<p>Não tem conta? <a href="cadastro.php">Cadastre-se</a></p>
+<p class="classDoNaoTemConta">Não tem conta? <a href="cadastro.php">Cadastre-se</a></p>
 
 <?php include('templates/footer.php'); ?>
