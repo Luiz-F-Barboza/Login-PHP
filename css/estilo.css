@@ -1,59 +1,154 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f8f8f8;
+/* ===============================
+   Variáveis de cores (tema primário)
+   =============================== */
+:root {
+    --color-primary: #007bff;
+    --color-primary-dark: #0056b3;
+    --color-bg: #f8f9fa;
+    --color-text: #212529;
+    --color-error-bg: #f8d7da;
+    --color-error-border: #f5c2c7;
+    --color-error-text: #842029;
+    --color-success-bg: #d1e7dd;
+    --color-success-border: #badbcc;
+    --color-success-text: #0f5132;
 }
 
+/* ===============================
+   Reset básico
+   =============================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===============================
+   Header
+   =============================== */
 header {
-    background: #007bff;
-    color: white;
-    padding: 15px;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ===============================
+   Navegação
+   =============================== */
+nav {
+    margin-top: 0.5rem;
     text-align: center;
 }
 
 nav a {
-    color: white;
+    color: #fff;
     text-decoration: none;
-    margin: 0 10px;
+    margin: 0 0.75rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
-nav a:hover {
+nav a:hover,
+nav a:focus {
+    color: #cce5ff;
     text-decoration: underline;
+    outline: none;
 }
 
+/* ===============================
+   Main container
+   =============================== */
 main {
-    padding: 20px;
-    max-width: 400px;
-    margin: 20px auto;
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0 0 6px #ccc;
+    background: #fff;
+    max-width: 420px;
+    width: 90%;
+    margin: 2rem auto;
+    padding: 2rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    flex-grow: 1;
 }
 
-input[type=text], input[type=email], input[type=password] {
+/* ===============================
+   Campos de entrada
+   =============================== */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
     width: 100%;
-    padding: 8px;
-    margin: 6px 0 12px 0;
-    box-sizing: border-box;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0 1.25rem;
+    border: 1.8px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+/* ===============================
+   Botões
+   =============================== */
 button {
-    padding: 10px 20px;
-    background-color: #007bff;
+    width: 100%;
+    background-color: var(--color-primary);
     border: none;
+    padding: 0.75rem 0;
     color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
 }
 
-button:hover {
-    background-color: #0056b3;
+button:hover,
+button:focus {
+    background-color: var(--color-primary-dark);
+    box-shadow: 0 0 10px rgba(0, 86, 179, 0.5);
+    outline: none;
+}
+
+/* ===============================
+   Mensagens de feedback
+   =============================== */
+p.msg-erro,
+p.msg-sucesso {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 p.msg-erro {
-    color: red;
+    background-color: var(--color-error-bg);
+    border: 1px solid var(--color-error-border);
+    color: var(--color-error-text);
 }
 
 p.msg-sucesso {
-    color: green;
+    background-color: var(--color-success-bg);
+    border: 1px solid var(--color-success-border);
+    color: var(--color-success-text);
 }

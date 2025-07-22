@@ -5,10 +5,10 @@
 
 1. Instale o [XAMPP](https://www.apachefriends.org/pt_br/index.html) e certifique-se que Apache e MySQL estão ativos.
 2. Crie o banco e a tabela conforme instruções acima.
-3. Copie a estrutura do projeto para a pasta `htdocs` do XAMPP (ex: `C:\xampp\htdocs\seuprojeto`).
+3. Copie a estrutura do projeto para a pasta `htdocs` do XAMPP (ex: `C:\xampp\htdocs\loginphp`).
 4. Acesse o sistema pelo navegador:
-   - Cadastro: `http://localhost/seuprojeto/cadastro.php`
-   - Login: `http://localhost/seuprojeto/login.php`
+   - Cadastro: `http://localhost/loginphp/cadastro.php`
+   - Login: `http://localhost/loginphp/login.php`
 5. Use o sistema para criar usuários, realizar login e acessar o painel protegido.
 
 ---
