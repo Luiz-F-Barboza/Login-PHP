@@ -3,9 +3,6 @@ session_start();
 include('includes/conexao.php');
 include('templates/header.php');
 
-// O SVG dos ícones de alerta pode ser movido para o header.php ou um arquivo de ícones
-// para evitar repetição em cada página que usar alertas.
-// Por enquanto, vou deixá-lo aqui como estava, mas com um comentário.
 echo '
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -16,56 +13,82 @@ echo '
   </symbol>
 </svg>';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = trim($_POST['nome']);
-    $email = trim($_POST['email']);
-    $senha = $_POST['senha'];
-    $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nome = trim($_POST['nome'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $senha = $_POST['senha'] ?? '';
+    $endereco = trim($_POST['endereco'] ?? '');
 
-    $sql = $conn->prepare("SELECT id FROM usuarios WHERE email = ?");
-    $sql->bind_param("s", $email);
-    $sql->execute();
-    $result = $sql->get_result();
+    echo '<div class="container mt-4">';
 
-    echo '<div class="container mt-4">'; // Container para as mensagens de feedback
-    if($result->num_rows > 0) {
+    if (empty($nome) || empty($email) || empty($senha) || empty($endereco)) {
         echo '
         <div class="alert alert-danger d-flex align-items-center justify-content-center" role="alert">
           <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <use xlink:href="#exclamation-triangle-fill"/>
           </svg>
           <div>
-            Email já cadastrado!
+            Todos os campos são obrigatórios!
+          </div>
+        </div>';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo '
+        <div class="alert alert-danger d-flex align-items-center justify-content-center" role="alert">
+          <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <use xlink:href="#exclamation-triangle-fill"/>
+          </svg>
+          <div>
+            Email inválido!
           </div>
         </div>';
     } else {
-        $stmt = $conn->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nome, $email, $senhaHash);
-        if ($stmt->execute()) {
-            echo '
-            <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
-              <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <use xlink:href="#check-circle-fill"/>
-              </svg>
-              <div>
-                Cadastro realizado com sucesso! <a href="login.php" class="alert-link">Faça login</a>
-              </div>
-            </div>';
-        } else {
+        $sql = $conn->prepare("SELECT id FROM usuarios WHERE email = ?");
+        $sql->bind_param("s", $email);
+        $sql->execute();
+        $result = $sql->get_result();
+
+        if ($result->num_rows > 0) {
             echo '
             <div class="alert alert-danger d-flex align-items-center justify-content-center" role="alert">
               <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <use xlink:href="#exclamation-triangle-fill"/>
               </svg>
               <div>
-                Erro no cadastro. Tente novamente.
+                Email já cadastrado!
               </div>
             </div>';
+        } else {
+            $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
+            $stmt = $conn->prepare("INSERT INTO usuarios (nome, email, senha, endereco) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $nome, $email, $senhaHash, $endereco);
+
+            if ($stmt->execute()) {
+                echo '
+                <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
+                  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#check-circle-fill"/>
+                  </svg>
+                  <div>
+                    Cadastro realizado com sucesso! <a href="login.php" class="alert-link">Faça login</a>
+                  </div>
+                </div>';
+            } else {
+                echo '
+                <div class="alert alert-danger d-flex align-items-center justify-content-center" role="alert">
+                  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:" width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#exclamation-triangle-fill"/>
+                  </svg>
+                  <div>
+                    Erro no cadastro. Tente novamente mais tarde ou entre em contato com o suporte.
+                  </div>
+                </div>';
+            }
+            $stmt->close();
         }
-        $stmt->close();
+        $sql->close();
     }
-    echo '</div>'; // Fecha o container das mensagens
-    $sql->close();
+    echo '</div>';
 }
 ?>
 
@@ -86,6 +109,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="mb-3">
                 <label for="senhaInput" class="form-label">Senha:</label>
                 <input type="password" class="form-control" id="senhaInput" name="senha" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="enderecoInput" class="form-label">Endereço:</label>
+                <input type="text" class="form-control" id="enderecoInput" name="endereco" required>
             </div>
 
             <button type="submit" class="btn btn-primary w-100 mt-3">Cadastrar</button>

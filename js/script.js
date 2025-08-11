@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let nome = formCadastro.nome.value.trim();
             let email = formCadastro.email.value.trim();
             let senha = formCadastro.senha.value;
+            let endereco = formCadastro.endereco.value.trim();
 
             if(nome.length < 3){
                 alert("Nome deve ter ao menos 3 caracteres.");
@@ -22,9 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 e.preventDefault();
                 return;
             }
+            if(endereco.length < 6){
+                alert("Endereco deve ter ao menos 6 caracteres.");
+                e.preventDefault();
+                return;
+            }
         });
     }
 
+        // kubernetes k8s
     const formLogin = document.querySelector("#form-login");
     if(formLogin){
         formLogin.addEventListener("submit", (e) => {
